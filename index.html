@@ -53,20 +53,6 @@
             }
         });
     </script>
-    <script>
-        function adjustMapHeight() {
-            const header = document.querySelector('header');
-            const map = document.getElementById('map');
-            const headerHeight = header.offsetHeight;
-            const windowHeight = window.innerHeight;
-            map.style.height = (windowHeight - headerHeight) + 'px';
-        }
-    
-        window.addEventListener('resize', adjustMapHeight);
-        window.addEventListener('orientationchange', adjustMapHeight);
-        window.addEventListener('load', adjustMapHeight);
-        document.addEventListener('DOMContentLoaded', adjustMapHeight);
-    </script>
     <script src="script.js"></script>
 </body>
 </html>

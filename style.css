@@ -99,11 +99,6 @@ header {
     box-sizing: border-box !important;
 }
 
-/* Ensure header is visible in fullscreen mode */
-html.leaflet-fullscreen-on header {
-    z-index: 99999 !important; /* Even higher than default header z-index */
-}
-
 /* Header içindeki öğelere tıklama özelliğini geri ver */
 header * {
     pointer-events: auto;

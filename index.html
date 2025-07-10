@@ -54,18 +54,16 @@
         });
     </script>
     <script>
-        function adjustMapHeight() {
-          const header = document.querySelector('header');
-          const map = document.getElementById('map');
-          const vh = window.innerHeight;
-          const headerHeight = header.offsetHeight;
-          map.style.height = (vh - headerHeight) + 'px';
+        function setMapHeight() {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const windowHeight = window.innerHeight;
+            const mapElement = document.getElementById('map');
+            mapElement.style.height = (windowHeight - headerHeight) + 'px';
         }
         
-        // Sayfa yüklendiğinde ve yeniden boyutlandığında çalıştır
-        window.addEventListener('load', adjustMapHeight);
-        window.addEventListener('resize', adjustMapHeight);
-        window.addEventListener('orientationchange', adjustMapHeight);
+        window.addEventListener('DOMContentLoaded', setMapHeight);
+        window.addEventListener('resize', setMapHeight);
+        window.addEventListener('orientationchange', setMapHeight);
     </script>
     <script src="script.js"></script>
 </body>

@@ -88,6 +88,12 @@ header {
     align-items: center !important;
     justify-content: center !important;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+    -webkit-perspective: 1000 !important;
+    perspective: 1000 !important;
     margin: 0 !important;
     border: none !important;
     box-sizing: border-box !important;
@@ -125,21 +131,28 @@ header h1 {
     html, body {
         height: 100%;
         width: 100%;
+        overflow: hidden;
+        position: fixed;
+        touch-action: none;
+        -webkit-overflow-scrolling: touch;
     }
     
     .container-fluid {
         padding-top: 60px; /* Match header height */
         height: 100%;
         position: relative;
+        overflow: hidden;
     }
     
     .row.flex-grow-1 {
         height: calc(100vh - 60px);
+        margin-top: 0;
         position: relative;
     }
     
     #map {
         height: 100%;
+        margin-top: 0;
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
         z-index: 1;

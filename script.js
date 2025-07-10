@@ -101,6 +101,9 @@ const cities = [
 document.addEventListener('DOMContentLoaded', function () {
     const map = L.map('map', {
         tap: false,
+        touchZoom: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
         zoomControl: true,
         dragging: true,
         closePopupOnClick: false,

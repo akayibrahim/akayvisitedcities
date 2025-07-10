@@ -174,3 +174,12 @@ document.addEventListener('DOMContentLoaded', function () {
     map.fitBounds(allMarkersGroup.getBounds());
     map.invalidateSize();
 });
+
+function resizeMap() {
+    const headerHeight = document.querySelector('header').offsetHeight;
+    document.getElementById('map').style.height = `${window.innerHeight - headerHeight}px`;
+}
+
+window.addEventListener('resize', resizeMap);
+window.addEventListener('orientationchange', resizeMap);
+document.addEventListener('DOMContentLoaded', resizeMap);

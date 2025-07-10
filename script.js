@@ -1,126 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mapElement = document.getElementById('map');
-    const pageHeader = document.getElementById('page-header'); // Get the header element
-    const fullscreenBtn = document.getElementById('fullscreen-btn'); // Get the fullscreen button
-    const menuToggle = document.getElementById('menuToggle'); // Get the menu toggle button
-    const sidebar = document.getElementById('sidebar'); // Get the sidebar
-
-    let isFullscreen = false;
-    let headerHiddenInitially = false; // Flag to track if header was hidden by fullscreen
-
-    // Initialize Leaflet Map (your existing code)
-    const map = L.map('map', {
-        tap: true, // Re-enable tap for mobile interactivity (was false)
-        closePopupOnClick: false // Keep popups open until explicitly closed
-    });
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 19
-    }).addTo(map);
-
-    const cityList = document.getElementById('city-list');
-
-    const groupedByCountry = cities.reduce((acc, city) => {
-        if (!acc[city.country]) {
-            acc[city.country] = [];
-        }
-        acc[city.country].push(city);
-        return acc;
-    }, {});
-
-    const countryCount = Object.keys(groupedByCountry).length;
-    const cityCount = cities.length;
-
-    const stats = document.createElement('div');
-    stats.id = 'stats';
-    stats.innerHTML = `<p>Visited <strong>${countryCount}</strong> countries and <strong>${cityCount}</strong> cities.</p>`;
-    sidebar.insertBefore(stats, cityList);
-
-    const allMarkers = [];
-
-    const sortedCountries = Object.keys(groupedByCountry).sort();
-
-    sortedCountries.forEach(country => {
-        const citiesInCountry = groupedByCountry[country];
-        const countryLi = document.createElement('li');
-        countryLi.className = 'list-group-item country-item';
-        countryLi.innerHTML = `<span>${country} (${citiesInCountry.length})</span>`;
-
-        const cityUl = document.createElement('ul');
-        cityUl.className = 'list-group city-sublist mt-2';
-
-        const countryMarkers = L.markerClusterGroup({ maxClusterRadius: 40 });
-
-        citiesInCountry.forEach(city => {
-            const cityLi = document.createElement('li');
-            cityLi.className = 'list-group-item';
-            cityLi.textContent = `${city.name} (${city.year})`;
-            cityLi.addEventListener('click', (e) => {
-                e.stopPropagation();
-                map.setView(city.latlng, 13);
-                // Optionally close sidebar on mobile when city is clicked
-                if (window.innerWidth <= 767.98 && sidebar.classList.contains('show')) {
-                    sidebar.classList.remove('show');
-                }
-            });
-            cityUl.appendChild(cityLi);
-
-            const marker = L.marker([city.latlng.lat, city.latlng.lng]);
-            marker.bindPopup(`<b>${city.name}</b><br>Visited in ${city.year}.`);
-            countryMarkers.addLayer(marker);
-            allMarkers.push(marker);
+    if (mapElement) {
+        mapElement.addEventListener('click', function(e) {
+            e.stopPropagation();
         });
-
-        map.addLayer(countryMarkers);
-
-        countryLi.appendChild(cityUl);
-        cityList.appendChild(countryLi);
-
-        countryLi.addEventListener('click', () => {
-            countryLi.classList.toggle('open');
-        });
-    });
-
-    const allMarkersGroup = L.featureGroup(allMarkers);
-    map.fitBounds(allMarkersGroup.getBounds());
-    map.invalidateSize();    
-
-    // 2. Toggle fullscreen when the map background is clicked (and not a marker/popup)
-    map.on('click', function(e) {
-        // Check if the click was on a marker or popup
-        // Leaflet's 'click' event on the map fires even if a marker/popup was clicked,
-        // so we need to prevent fullscreen if an interactive element was the target.
-        const targetClassList = e.originalEvent.target.classList;
-        if (!targetClassList.contains('leaflet-marker-icon') && 
-            !targetClassList.contains('leaflet-popup') &&
-            !targetClassList.contains('leaflet-popup-content') &&
-            !targetClassList.contains('leaflet-popup-close-button')) {
-                        
-        }
-    });
-
-    // Handle header behavior based on fullscreen state
-    // "stop close header" interpretation:
-    // When fullscreen is active, the header is explicitly hidden.
-    // When exiting fullscreen, the header is always shown again.
-    // The previous mobile-specific `event.target !== map` in `index.html`'s listener
-    // already prevents clicks on the map from toggling the sidebar
-    // when the sidebar is open, and it still allows fullscreen to hide the header.
-    // The `headerHiddenInitially` flag is no longer strictly needed if the logic is tied to `isFullscreen`.
-    // The current setup: when fullscreen, header is `.hidden`. When not fullscreen, header is visible.
-    // This is a direct toggle, so the header will always follow the fullscreen state.
-
-    // A small adjustment to the mobile menu toggle to prevent map clicks from closing it
-    // if a click on the map is meant for fullscreen.
-    // The existing `index.html` script for `document.addEventListener('click')` already has:
-    // `!map.contains(event.target)` which will prevent map clicks from closing the sidebar.
-    // This is good.
+    }
 });
 
-
-// City data (your existing cities array)
 const cities = [
     { name: 'Sarajevo', latlng: { lat: 43.8562586, lng: 18.4130763 }, year: 2017, country: 'Bosnia and Herzegovina' },
     { name: 'Sofia', latlng: { lat: 42.6977082, lng: 23.3218675 }, year: 2018, country: 'Bulgaria' },
@@ -211,3 +97,80 @@ const cities = [
     { name: 'Brussels', latlng: { lat: 50.8505, lng: 4.3488 }, year: 2013, country: 'Belgium' },
     { name: 'Netherlands', latlng: { lat: 52.5000, lng: 5.7500 }, year: 2013, country: 'Netherlands' }
 ];
+
+document.addEventListener('DOMContentLoaded', function () {
+    const map = L.map('map', {
+        tap: false, // Bu satırı ekleyin
+        closePopupOnClick: false // Bu satırı ekleyin
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+    }).addTo(map);
+
+    const cityList = document.getElementById('city-list');
+
+    const groupedByCountry = cities.reduce((acc, city) => {
+        if (!acc[city.country]) {
+            acc[city.country] = [];
+        }
+        acc[city.country].push(city);
+        return acc;
+    }, {});
+
+    const countryCount = Object.keys(groupedByCountry).length;
+    const cityCount = cities.length;
+
+    const stats = document.createElement('div');
+    stats.id = 'stats';
+    stats.innerHTML = `<p>Visited <strong>${countryCount}</strong> countries and <strong>${cityCount}</strong> cities.</p>`;
+    const sidebar = document.getElementById('sidebar');
+    sidebar.insertBefore(stats, cityList);
+
+    const allMarkers = [];
+
+    const sortedCountries = Object.keys(groupedByCountry).sort();
+
+    sortedCountries.forEach(country => {
+        const citiesInCountry = groupedByCountry[country];
+        const countryLi = document.createElement('li');
+        countryLi.className = 'list-group-item country-item';
+        countryLi.innerHTML = `<span>${country} (${citiesInCountry.length})</span>`;
+
+        const cityUl = document.createElement('ul');
+        cityUl.className = 'list-group city-sublist mt-2';
+
+        const countryMarkers = L.markerClusterGroup({ maxClusterRadius: 40 });
+
+        citiesInCountry.forEach(city => {
+            const cityLi = document.createElement('li');
+            cityLi.className = 'list-group-item';
+            cityLi.textContent = `${city.name} (${city.year})`;
+            cityLi.addEventListener('click', (e) => {
+                e.stopPropagation();
+                map.setView(city.latlng, 13);
+            });
+            cityUl.appendChild(cityLi);
+
+            const marker = L.marker([city.latlng.lat, city.latlng.lng]);
+            marker.bindPopup(`<b>${city.name}</b><br>Visited in ${city.year}.`);
+            countryMarkers.addLayer(marker);
+            allMarkers.push(marker);
+        });
+
+        map.addLayer(countryMarkers);
+
+        countryLi.appendChild(cityUl);
+        cityList.appendChild(countryLi);
+
+        countryLi.addEventListener('click', () => {
+            countryLi.classList.toggle('open');
+        });
+    });
+
+    const allMarkersGroup = L.featureGroup(allMarkers);
+    map.fitBounds(allMarkersGroup.getBounds());
+    map.invalidateSize();
+});

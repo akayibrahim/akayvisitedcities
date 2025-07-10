@@ -22,9 +22,10 @@ body {
 }
 
 #map {
+    height: calc(100vh - 60px); /* Header yüksekliği kadar kıs */
     width: 100%;
-    height: auto; /* JavaScript ile ayarlanacak */
     position: relative;
+    z-index: 0;
 }
 
 #sidebar {

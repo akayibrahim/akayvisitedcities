@@ -97,7 +97,6 @@ header {
     margin: 0 !important;
     border: none !important;
     box-sizing: border-box !important;
-    pointer-events: none; /* Tıklama olaylarını engelle */
 }
 
 /* Header içindeki öğelere tıklama özelliğini geri ver */

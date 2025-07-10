@@ -23,7 +23,7 @@ body {
 
 #map {
     width: 100%;
-    height: auto; /* JavaScript ile ayarlanacak */
+    height: auto !important;
     position: relative;
 }
 

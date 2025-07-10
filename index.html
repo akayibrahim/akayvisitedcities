@@ -9,7 +9,8 @@
         padding: 0;
       }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
       var map;
       var cities = [
@@ -194,36 +195,18 @@
           year: 2022
         }
       ];
-	  
-	  var starIcon = {
-		  path: 'M14.49 18.11L21.23 22.7 19.14 14.7 25.19 9.7 16.92 8.49 14.49 0.7 12.06 8.49 3.8 9.7 9.85 14.7 7.76 22.7z',
-		  fillColor: 'gold',
-		  fillOpacity: 1,
-		  strokeWeight: 0,
-		  scale: 0.8
-		};
 
       function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 41.0054954, lng: 28.8717527},
-          zoom: 2.8,
-          disableDefaultUI: true,
-		  zoomControl: false
-        });
+        map = L.map('map').setView([41.0054954, 28.8717527], 2.8);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
         for (var i = 0; i < cities.length; i++) {
-          var marker = new google.maps.Marker({
-            position: cities[i].latlng,
-            map: map,
-            title: cities[i].name + ' (' + cities[i].year + ')',
-			icon: starIcon
-          });
-		  var contentString = '<div>' + cities[i].name + ' Visited in ' + cities[i].year + '</div>';
-		  var infowindow = new google.maps.InfoWindow({
-            content: contentString
-          });
-          //infowindow.open(map, marker);
-
+            var city = cities[i];
+            var marker = L.marker([city.latlng.lat, city.latlng.lng]).addTo(map);
+            marker.bindPopup('<b>' + city.name + '</b><br>Visited in ' + city.year + '.');
         }
       }
     </script>

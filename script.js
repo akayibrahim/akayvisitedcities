@@ -100,7 +100,8 @@ const cities = [
 
 document.addEventListener('DOMContentLoaded', function () {
     const map = L.map('map', {
-        tap: false,        
+        tap: false,
+        doubleClickZoom: false,
     });
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {

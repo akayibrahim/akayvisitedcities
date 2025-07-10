@@ -174,19 +174,3 @@ document.addEventListener('DOMContentLoaded', function () {
     map.fitBounds(allMarkersGroup.getBounds());
     map.invalidateSize();
 });
-
-function adjustMapHeight() {
-    const header = document.querySelector('header');
-    const mapWrapper = document.getElementById('map-wrapper');
-    if (!header || !mapWrapper) return;
-  
-    const headerHeight = header.offsetHeight;
-    const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-  
-    mapWrapper.style.height = (vh - headerHeight) + 'px';
-  }
-  
-  window.addEventListener('DOMContentLoaded', adjustMapHeight);
-  window.visualViewport && window.visualViewport.addEventListener('resize', adjustMapHeight);
-  window.addEventListener('resize', adjustMapHeight);
-  window.addEventListener('orientationchange', adjustMapHeight);

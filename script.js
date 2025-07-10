@@ -119,19 +119,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const allMarkers = [];
 
-    for (const country in groupedByCountry) {
+    const sortedCountries = Object.keys(groupedByCountry).sort();
+
+    sortedCountries.forEach(country => {
         const citiesInCountry = groupedByCountry[country];
         const countryLi = document.createElement('li');
-        countryLi.className = 'country-item';
+        countryLi.className = 'list-group-item country-item';
         countryLi.innerHTML = `<span>${country} (${citiesInCountry.length})</span>`;
 
         const cityUl = document.createElement('ul');
-        cityUl.className = 'city-sublist';
+        cityUl.className = 'list-group city-sublist mt-2';
 
         const countryMarkers = L.markerClusterGroup({ maxClusterRadius: 40 });
 
         citiesInCountry.forEach(city => {
             const cityLi = document.createElement('li');
+            cityLi.className = 'list-group-item';
             cityLi.textContent = `${city.name} (${city.year})`;
             cityLi.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -153,8 +156,9 @@ document.addEventListener('DOMContentLoaded', function () {
         countryLi.addEventListener('click', () => {
             countryLi.classList.toggle('open');
         });
-    }
+    });
 
     const allMarkersGroup = L.featureGroup(allMarkers);
     map.fitBounds(allMarkersGroup.getBounds());
+    map.invalidateSize();
 });

@@ -32,7 +32,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         // Toggle mobile menu
-        document.getElementById('menuToggle').addEventListener('click', function() {
+        document.getElementById('menuToggle').addEventListener('click', function(e) {
+            e.stopPropagation();
             document.getElementById('sidebar').classList.toggle('show');
         });
         
@@ -40,10 +41,13 @@
         document.addEventListener('click', function(event) {
             const sidebar = document.getElementById('sidebar');
             const menuToggle = document.getElementById('menuToggle');
+            const map = document.getElementById('map');
             
             if (window.innerWidth <= 767.98 && 
                 !sidebar.contains(event.target) && 
                 !menuToggle.contains(event.target) &&
+                event.target !== map &&
+                !map.contains(event.target) &&
                 sidebar.classList.contains('show')) {
                 sidebar.classList.remove('show');
             }

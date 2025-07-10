@@ -1,3 +1,12 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const mapElement = document.getElementById('map');
+    if (mapElement) {
+        mapElement.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+});
+
 const cities = [
     { name: 'Sarajevo', latlng: { lat: 43.8562586, lng: 18.4130763 }, year: 2017, country: 'Bosnia and Herzegovina' },
     { name: 'Sofia', latlng: { lat: 42.6977082, lng: 23.3218675 }, year: 2018, country: 'Bulgaria' },
@@ -90,7 +99,10 @@ const cities = [
 ];
 
 document.addEventListener('DOMContentLoaded', function () {
-    const map = L.map('map');
+    const map = L.map('map', {
+        tap: false, // Bu satırı ekleyin
+        closePopupOnClick: false // Bu satırı ekleyin
+    });
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',

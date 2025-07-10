@@ -85,40 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const allMarkersGroup = L.featureGroup(allMarkers);
     map.fitBounds(allMarkersGroup.getBounds());
-    map.invalidateSize();
-
-
-    // Fullscreen logic
-    const toggleFullscreen = () => {
-        isFullscreen = !isFullscreen;
-
-        if (isFullscreen) {
-            // Enter fullscreen
-            mapElement.classList.add('fullscreen');
-            pageHeader.classList.add('hidden'); // Hide header
-            fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>'; // Change icon to compress
-            
-            // On mobile, ensure sidebar is closed when going fullscreen
-            if (window.innerWidth <= 767.98 && sidebar.classList.contains('show')) {
-                sidebar.classList.remove('show');
-            }
-            // Block pointer events on header when hidden, so map interactions aren't blocked by its invisible area
-            pageHeader.style.pointerEvents = 'none';
-
-        } else {
-            // Exit fullscreen
-            mapElement.classList.remove('fullscreen');
-            pageHeader.classList.remove('hidden'); // Show header
-            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>'; // Change icon to expand
-            pageHeader.style.pointerEvents = 'auto'; // Restore pointer events
-        }
-
-        // Invalidate map size so Leaflet redraws correctly
-        map.invalidateSize();
-    };
-
-    // 1. Toggle fullscreen when the dedicated button is clicked
-    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    map.invalidateSize();    
 
     // 2. Toggle fullscreen when the map background is clicked (and not a marker/popup)
     map.on('click', function(e) {
@@ -130,8 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             !targetClassList.contains('leaflet-popup') &&
             !targetClassList.contains('leaflet-popup-content') &&
             !targetClassList.contains('leaflet-popup-close-button')) {
-            
-            toggleFullscreen();
+                        
         }
     });
 

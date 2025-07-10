@@ -111,12 +111,6 @@ header {
     transition: transform 0.3s ease-in-out; /* Add transition for header hiding */
 }
 
-/* Header hidden state */
-header.hidden {
-    transform: translateY(-100%);
-}
-
-
 /* Header içindeki öğelere tıklama özelliğini geri ver */
 header * {
     pointer-events: auto;

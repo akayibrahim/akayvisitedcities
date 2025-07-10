@@ -138,14 +138,13 @@ header h1 {
     }
     
     .container-fluid {
-        padding-top: 60px; /* Match header height */
-        height: 100%;
+        height: calc(100% - 60px); /* Account for header height */
         position: relative;
         overflow: hidden;
     }
     
     .row.flex-grow-1 {
-        height: calc(100vh - 60px);
+        height: 100%;
         margin-top: 0;
         position: relative;
     }

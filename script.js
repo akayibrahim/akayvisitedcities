@@ -1,10 +1,50 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mapElement = document.getElementById('map');
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.getElementById('menuToggle');
+    const header = document.querySelector('header');
+
     if (mapElement) {
         mapElement.addEventListener('click', function(e) {
             e.stopPropagation();
+            if (sidebar && sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
+            }
+            if (header) {
+                header.classList.add('header-hidden');
+            }
         });
     }
+
+    if (sidebar) {
+        sidebar.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (sidebar) {
+                sidebar.classList.toggle('show');
+            }
+            if (header) {
+                header.classList.remove('header-hidden');
+            }
+        });
+    }
+
+    // Close menu when clicking outside on mobile
+    document.addEventListener('click', function(event) {
+        if (window.innerWidth <= 767.98 && 
+            !sidebar.contains(event.target) && 
+            !menuToggle.contains(event.target) &&
+            event.target !== mapElement &&
+            !mapElement.contains(event.target) &&
+            sidebar.classList.contains('show')) {
+            sidebar.classList.remove('show');
+        }
+    });
 });
 
 const cities = [

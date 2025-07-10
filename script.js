@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mapElement) {
         mapElement.addEventListener('click', function(e) {
             e.stopPropagation();
+            e.preventDefault(); // Haritaya tıklanınca tam ekran olmasını engellemek için eklendi
         });
     }
 });

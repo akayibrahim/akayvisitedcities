@@ -1,217 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>AKAY Visited Cities</title>
-	<style>
-      html, body, #map {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+<head>
+    <title>Akay's Visited Cities</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <div id="container">
+        <div id="sidebar">
+            <h1>Akay's Travel Map</h1>
+            <ul id="city-list"></ul>
+        </div>
+        <div id="map"></div>
+    </div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script>
-      var map;
-      var cities = [
-        {
-          name: 'Saray Bosna',
-          latlng: {lat: 43.8562586, lng: 18.4130763},
-          year: 2017
-        },
-        {
-          name: 'Sofya',
-          latlng: {lat: 42.6977082, lng: 23.3218675},
-          year: 2018
-        },
-        {
-          name: 'Samsun',
-          latlng: {lat: 41.276, lng: 36.355},
-          year: 2013
-        },
-        {
-          name: 'Ordu',
-          latlng: {lat: 40.989, lng: 37.875},
-          year: 2013
-        },
-        {
-          name: 'Trabzon',
-          latlng: {lat: 40.754, lng: 39.623},
-          year: 2013
-        },
-        {
-          name: 'Rize',
-          latlng: {lat: 40.989, lng: 40.532},
-          year: 2013
-        },
-        {
-          name: 'Batum',
-          latlng: {lat: 41.652, lng: 41.637},
-          year: 2013
-        },
-        {
-          name: 'Sinop',
-          latlng: {lat: 42.025, lng: 35.144},
-          year: 2013
-        },
-        {
-          name: 'Barcelona',
-          latlng: {lat: 41.380, lng: 2.175},
-          year: 2013
-        },
-        {
-          name: 'Paris',
-          latlng: {lat: 48.869, lng: 2.292},
-          year: 2013
-        },
-        {
-          name: 'Madrid',
-          latlng: {lat: 40.4381307, lng: -3.8199635},
-          year: 2013
-        },
-		{
-          name: 'Bodrum',
-          latlng: {lat: 37.033, lng: 27.436},
-          year: 2014
-        },
-		{
-          name: 'Paris',
-          latlng: {lat: 48.869, lng: 2.292},
-          year: 2015
-        },
-		{
-          name: 'Midilli',
-          latlng: {lat: 39.1761664, lng: 26.0832805},
-          year: 2015
-        },
-		{
-          name: 'Santorini',
-          latlng: {lat: 36.4203422, lng: 25.414253},
-          year: 2015
-        },
-		{
-          name: 'Rodos',
-          latlng: {lat: 36.435784, lng: 28.2041503},
-          year: 2015
-        },
-		{
-          name: 'Venedik',
-          latlng: {lat: 45.4046983, lng: 12.2469066},
-          year: 2015
-        },
-		{
-          name: 'Nice',
-          latlng: {lat: 43.7032979, lng: 7.1826006},
-          year: 2015
-        },
-		{
-          name: 'Dubai',
-          latlng: {lat: 25.0763802, lng: 54.9466132},
-          year: 2016
-        },
-		{
-          name: 'Maldivler',
-          latlng: {lat: 3.1151953, lng: 70.9906052},
-          year: 2016
-        },
-		{
-          name: 'Halkidiki',
-          latlng: {lat: 40.2752752, lng: 23.4054475},
-          year: 2016
-        },
-		{
-          name: 'Malta',
-          latlng: {lat: 35.9426462, lng: 14.2379227},
-          year: 2016
-        },
-		{
-          name: 'Kıbrıs',
-          latlng: {lat: 35.168626, lng: 32.8633904},
-          year: 2016
-        },
-		{
-          name: 'Lisbon',
-          latlng: {lat: 38.7436883, lng: -9.1953085},
-          year: 2017
-        },
-		{
-          name: 'Roma',
-          latlng: {lat: 41.9102411, lng: 12.3955712},
-          year: 2017
-        },
-		{
-          name: 'Irlanda',
-          latlng: {lat: 53.3655634, lng: -10.4655587},
-          year: 2017
-        },
-		{
-          name: 'Fethiye',
-          latlng: {lat: 36.6518837, lng: 29.0867647},
-          year: 2017
-        },
-		{
-          name: 'Bursa',
-          latlng: {lat: 40.2217879, lng: 28.962078},
-          year: 2017
-        },
-		{
-          name: 'Hırvatistan',
-          latlng: {lat: 44.4286325, lng: 14.1577958},
-          year: 2017
-        },
-		{
-          name: 'Lisbon',
-          latlng: {lat: 38.7436883, lng: -9.1953085},
-          year: 2017
-        },
-		{
-          name: 'Malaga',
-          latlng: {lat: 36.718339, lng: -4.5194785},
-          year: 2017
-        },
-		{
-          name: 'Sevilya',
-          latlng: {lat: 37.3754864, lng: -6.0252698},
-          year: 2017
-        },
-		{
-          name: 'Granada',
-          latlng: {lat: 37.1810095, lng: -3.626377},
-          year: 2017
-        },
-		{
-          name: 'Berlin',
-          latlng: {lat: 52.50697, lng: 13.2843064},
-          year: 2018
-        },
-		{
-          name: 'Göcek',
-          latlng: {lat: 36.7538614, lng: 28.9357848},
-          year: 2022
-        },
-		{
-          name: 'Akbük',
-          latlng: {lat: 37.3878272, lng: 27.4242628},
-          year: 2022
-        }
-      ];
-
-      function initMap() {
-        map = L.map('map').setView([41.0054954, 28.8717527], 2.8);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        for (var i = 0; i < cities.length; i++) {
-            var city = cities[i];
-            var marker = L.marker([city.latlng.lat, city.latlng.lng]).addTo(map);
-            marker.bindPopup('<b>' + city.name + '</b><br>Visited in ' + city.year + '.');
-        }
-      }
-    </script>
-  </head>
-  <body onload="initMap()">
-    <div id="map"></div>
-  </body>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>

@@ -1,0 +1,68 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    display: flex;
+    height: 100vh;
+}
+
+#sidebar {
+    width: 300px;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#city-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#city-list li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+#city-list li:hover {
+    background-color: #eee;
+}
+
+.country-item > span {
+    font-weight: bold;
+}
+
+.city-sublist {
+    list-style-type: none;
+    padding-left: 20px;
+    display: none; /* Hidden by default */
+}
+
+.country-item.open .city-sublist {
+    display: block; /* Show when parent is open */
+}
+
+#map {
+    flex: 1;
+}
+
+#stats {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#stats p {
+    margin: 0;
+    font-size: 16px;
+}

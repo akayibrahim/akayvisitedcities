@@ -132,7 +132,6 @@ header h1 {
         height: 100%;
         width: 100%;
         overflow: hidden;
-        position: fixed;
         touch-action: none;
         -webkit-overflow-scrolling: touch;
     }

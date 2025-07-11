@@ -99,7 +99,10 @@ const cities = [
 ];
 
 document.addEventListener('DOMContentLoaded', function () {
-    const map = L.map('map');
+    const map = L.map('map', {
+        tap: false, // Bu satırı ekleyin
+        closePopupOnClick: false // Bu satırı ekleyin
+    });
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',

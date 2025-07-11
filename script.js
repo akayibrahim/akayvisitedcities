@@ -100,7 +100,6 @@ const cities = [
 
 document.addEventListener('DOMContentLoaded', function () {
     const map = L.map('map', {
-        fullscreenControl: false,
         tap: false, // Bu satırı ekleyin
         closePopupOnClick: false // Bu satırı ekleyin
     });

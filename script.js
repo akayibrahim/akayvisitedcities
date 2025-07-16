@@ -174,12 +174,3 @@ document.addEventListener('DOMContentLoaded', function () {
     map.fitBounds(allMarkersGroup.getBounds());
     map.invalidateSize();
 });
-
-document.addEventListener('fullscreenchange', function () {
-    const header = document.querySelector('header');
-    if (document.fullscreenElement) {
-        header.classList.add('hidden-on-fullscreen');
-    } else {
-        header.classList.remove('hidden-on-fullscreen');
-    }
-});

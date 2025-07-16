@@ -131,8 +131,9 @@ header h1 {
     html, body {
         height: 100%;
         width: 100%;
-        overflow-y: auto; /* Allow vertical scroll */
-        overflow-x: hidden; /* Prevent horizontal scroll */
+        overflow: hidden;
+        position: fixed;
+        touch-action: none;
         -webkit-overflow-scrolling: touch;
     }
     

@@ -100,8 +100,11 @@ const cities = [
 
 document.addEventListener('DOMContentLoaded', function () {
     const map = L.map('map', {
-        tap: false, // Bu satırı ekleyin
-        closePopupOnClick: false // Bu satırı ekleyin
+        tap: true,
+        closePopupOnClick: false,
+        touchZoom: true,
+        dragging: true,
+        zoomControl: true
     });
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {

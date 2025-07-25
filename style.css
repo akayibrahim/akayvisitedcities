@@ -133,7 +133,7 @@ header h1 {
         width: 100%;
         overflow: hidden;
         position: fixed;
-        touch-action: none;
+        touch-action: manipulation;
         -webkit-overflow-scrolling: touch;
     }
     

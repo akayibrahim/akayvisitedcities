@@ -117,7 +117,6 @@ const cities = [
     // Greece - additional Halkidiki visits
     { name: 'Halkidiki', latlng: { lat: 40.2752752, lng: 23.4054475 }, year: 2023, country: 'Greece' },
     { name: 'Halkidiki', latlng: { lat: 40.2752752, lng: 23.4054475 }, year: 2024, country: 'Greece' },
-    { name: 'Halkidiki', latlng: { lat: 40.2752752, lng: 23.4054475 }, year: 2026, country: 'Greece' },
 
     // Cyprus - pre-2021 visits: Girne/Lefkosa, post-2021 visits: Magusa
     { name: 'Girne', latlng: { lat: 35.3417, lng: 33.3167 }, year: 2016, country: 'Cyprus' },
@@ -129,6 +128,7 @@ const cities = [
     { name: 'Magusa', latlng: { lat: 35.1176, lng: 33.9391 }, year: 2023, country: 'Cyprus' },
     { name: 'Magusa', latlng: { lat: 35.1176, lng: 33.9391 }, year: 2024, country: 'Cyprus' },
     { name: 'Magusa', latlng: { lat: 35.1176, lng: 33.9391 }, year: 2026, country: 'Cyprus' },
+    { name: 'Halkidiki', latlng: { lat: 40.2752752, lng: 23.4054475 }, year: 2026, country: 'Greece' },
     { name: 'Magusa', latlng: { lat: 35.1176, lng: 33.9391 }, year: 2026, country: 'Cyprus' }
 ];
 

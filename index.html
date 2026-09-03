@@ -34,6 +34,17 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
+        // Safety net: iOS Safari can auto-scroll the body internally (e.g. to
+        // bring a tapped button "into view"), which visually drags the fixed
+        // header out of place. Body isn't meant to scroll at all on mobile,
+        // so snap it back to 0 whenever that happens.
+        function snapBodyScroll() {
+            if (window.innerWidth > 767.98) return;
+            if (document.body.scrollTop !== 0) document.body.scrollTop = 0;
+            if (document.documentElement.scrollTop !== 0) document.documentElement.scrollTop = 0;
+        }
+        document.addEventListener('scroll', snapBodyScroll, true);
+
         // Toggle mobile menu
         document.getElementById('menuToggle').addEventListener('click', function(e) {
             e.stopPropagation();

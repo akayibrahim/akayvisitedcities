@@ -273,13 +273,15 @@ header h1 {
 
 /* Mobile styles */
 @media (max-width: 767.98px) {
+    /* No position:fixed here: header/#sidebar are position:fixed, and
+       iOS WebKit has a bug where a fixed element nested inside a fixed
+       ancestor scrolls along with that ancestor's internal scrollTop
+       instead of staying pinned to the viewport. overflow:hidden +
+       overscroll-behavior alone are enough to stop rubber-band scroll. */
     html, body {
         height: 100%;
         width: 100%;
         overflow: hidden;
-        position: fixed;
-        top: 0;
-        left: 0;
         overscroll-behavior: none;
         touch-action: none;
         -webkit-overflow-scrolling: touch;
